@@ -127,6 +127,7 @@ def test_setting_wrong_value():
         board9 = Board(9)
         board9.set_position(1, 1, "V")
 
+
 def test_val_check_true():
     """
         Test val_check function on setting right values.
@@ -134,6 +135,7 @@ def test_val_check_true():
     """
     board9 = Board(9)
     assert True == board9.val_check("B")
+
 
 def test_val_check_true_None():
     """
@@ -143,6 +145,7 @@ def test_val_check_true_None():
     board9 = Board(9)
     assert True == board9.val_check(None)
 
+
 def test_val_check_false():
     """
         Test val_check function on setting wrong values.
@@ -151,6 +154,7 @@ def test_val_check_false():
     with pytest.raises(AttributeError):
         board9 = Board(9)
         board9.val_check("Z")
+
 
 def test_setting_possition_on_non_empty_spot():
     """
@@ -162,6 +166,7 @@ def test_setting_possition_on_non_empty_spot():
     with pytest.raises(Exception):
         board9.set_position(1, 1, "W")
 
+
 def test_find_next_sibling_1hor():
     """
         Test functionality of function find_next_sibling.
@@ -170,10 +175,11 @@ def test_find_next_sibling_1hor():
         2 spots, same color, horizontal
     """
     board9 = Board(9)
-    board9.set_position(2,1,"B")
-    board9.set_position(3,1,"B")
-    result = board9.find_next_siblings((2,1), None, [])
-    assert result[0] == (3,1)
+    board9.set_position(2, 1, "B")
+    board9.set_position(3, 1, "B")
+    result = board9.find_next_siblings((2, 1), None, [])
+    assert result[0] == (3, 1)
+
 
 def test_find_next_siblings_1vert():
     """
@@ -183,10 +189,11 @@ def test_find_next_siblings_1vert():
         2 spots, same color, vertical
     """
     board9 = Board(9)
-    board9.set_position(3,1,"B")
-    board9.set_position(3,2,"B")
-    result = board9.find_next_siblings((3,1), None, [])
-    assert result[0] == (3,2)
+    board9.set_position(3, 1, "B")
+    board9.set_position(3, 2, "B")
+    result = board9.find_next_siblings((3, 1), None, [])
+    assert result[0] == (3, 2)
+
 
 def test_find_next_siblings_2_hor():
     """
@@ -196,11 +203,12 @@ def test_find_next_siblings_2_hor():
         2 spots, same color, horizontal
     """
     board9 = Board(9)
-    board9.set_position(3,3,"B")
-    board9.set_position(2,3,"B")
-    board9.set_position(4,3,"B")
-    result = board9.find_next_siblings((3,3), None, [])
-    assert result == [(2,3),(4,3)]
+    board9.set_position(3, 3, "B")
+    board9.set_position(2, 3, "B")
+    board9.set_position(4, 3, "B")
+    result = board9.find_next_siblings((3, 3), None, [])
+    assert result == [(2, 3), (4, 3)]
+
 
 def test_find_next_siblings_2_vert():
     """
@@ -210,11 +218,12 @@ def test_find_next_siblings_2_vert():
         2 spots, same color, vertical
     """
     board9 = Board(9)
-    board9.set_position(4,3,"B")
-    board9.set_position(4,4,"B")
-    board9.set_position(4,2,"B")
-    result = board9.find_next_siblings((4,3), None, [])
-    assert result == [(4,4),(4,2)]
+    board9.set_position(4, 3, "B")
+    board9.set_position(4, 4, "B")
+    board9.set_position(4, 2, "B")
+    result = board9.find_next_siblings((4, 3), None, [])
+    assert result == [(4, 4), (4, 2)]
+
 
 def test_find_next_siblings_3_vert_hor():
     """
@@ -224,15 +233,16 @@ def test_find_next_siblings_3_vert_hor():
         4 spots, same color, vertical and horizontal
     """
     board9 = Board(9)
-    board9.set_position(4,2,"B")
-    board9.set_position(4,3,"B")
-    board9.set_position(4,4,"B")
-    board9.set_position(3,3,"B")
-    result = board9.find_next_siblings((4,3), None, [])
+    board9.set_position(4, 2, "B")
+    board9.set_position(4, 3, "B")
+    board9.set_position(4, 4, "B")
+    board9.set_position(3, 3, "B")
+    result = board9.find_next_siblings((4, 3), None, [])
 
     # sorting the result data and the assumed data to have
     # a common structured data to check
-    assert sorted(result) == sorted([(4,4),(4,2),(3,3)])
+    assert sorted(result) == sorted([(4, 4), (4, 2), (3, 3)])
+
 
 def test_find_next_siblings_4_vert_hor():
     """
@@ -242,16 +252,17 @@ def test_find_next_siblings_4_vert_hor():
         5 spots, same color, vertical and horizontal
     """
     board9 = Board(9)
-    board9.set_position(4,2,"B")
-    board9.set_position(4,3,"B")
-    board9.set_position(4,4,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(5,3,"B")
-    result = board9.find_next_siblings((4,3), None, [])
+    board9.set_position(4, 2, "B")
+    board9.set_position(4, 3, "B")
+    board9.set_position(4, 4, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(5, 3, "B")
+    result = board9.find_next_siblings((4, 3), None, [])
 
     # sorting the result data and the assumed data to have
     # a common structured data to check
-    assert sorted(result) == sorted([(4,4),(4,2),(3,3),(5,3)])
+    assert sorted(result) == sorted([(4, 4), (4, 2), (3, 3), (5, 3)])
+
 
 def test_connected_positions_ver_up():
     """
@@ -267,11 +278,12 @@ def test_connected_positions_ver_up():
     y1 = 2
     x2 = 2
     y2 = 3
-    board9.set_position(x1,y1,"B")
-    board9.set_position(x2,y2,"B")
+    board9.set_position(x1, y1, "B")
+    board9.set_position(x2, y2, "B")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
     assert result == True
+
 
 def test_connected_positions_ver_down():
     """
@@ -284,11 +296,12 @@ def test_connected_positions_ver_down():
     y1 = 8
     x2 = 3
     y2 = 7
-    board9.set_position(x1,y1,"B")
-    board9.set_position(x2,y2,"B")
+    board9.set_position(x1, y1, "B")
+    board9.set_position(x2, y2, "B")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
     assert result == True
+
 
 def test_connected_positions_hor_left():
     """
@@ -300,11 +313,12 @@ def test_connected_positions_hor_left():
     y1 = 2
     x2 = 3
     y2 = 2
-    board9.set_position(x1,y1,"B")
-    board9.set_position(x2,y2,"B")
+    board9.set_position(x1, y1, "B")
+    board9.set_position(x2, y2, "B")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
     assert result == True
+
 
 def test_false_connection_positions_diagonal():
     """
@@ -316,11 +330,12 @@ def test_false_connection_positions_diagonal():
     y1 = 5
     x2 = 6
     y2 = 6
-    board9.set_position(x1,y1,"W")
-    board9.set_position(x2,y2,"B")
+    board9.set_position(x1, y1, "W")
+    board9.set_position(x2, y2, "B")
 
     with pytest.raises(AttributeError):
-        board9.is_adjacent(x1,y1,x2,y2)
+        board9.is_adjacent(x1, y1, x2, y2)
+
 
 def test_disconnected_positions_diagonal():
     """
@@ -333,12 +348,13 @@ def test_disconnected_positions_diagonal():
     y1 = 5
     x2 = 6
     y2 = 6
-    board9.set_position(x1,y1,"W")
-    board9.set_position(x2,y2,"W")
+    board9.set_position(x1, y1, "W")
+    board9.set_position(x2, y2, "W")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
 
     assert result == False
+
 
 def test_disconnected_positions_random():
     """
@@ -351,12 +367,13 @@ def test_disconnected_positions_random():
     y1 = 8
     x2 = 8
     y2 = 2
-    board9.set_position(x1,y1,"W")
-    board9.set_position(x2,y2,"W")
+    board9.set_position(x1, y1, "W")
+    board9.set_position(x2, y2, "W")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
 
     assert result == False
+
 
 def test_disconnected_positions_2steps_hor():
     """
@@ -370,12 +387,13 @@ def test_disconnected_positions_2steps_hor():
     y1 = 3
     x2 = 5
     y2 = 3
-    board9.set_position(x1,y1,"W")
-    board9.set_position(x2,y2,"W")
+    board9.set_position(x1, y1, "W")
+    board9.set_position(x2, y2, "W")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
 
     assert result == False
+
 
 def test_disconnected_positions_2steps_vert():
     """
@@ -389,12 +407,13 @@ def test_disconnected_positions_2steps_vert():
     y1 = 3
     x2 = 5
     y2 = 5
-    board9.set_position(x1,y1,"W")
-    board9.set_position(x2,y2,"W")
+    board9.set_position(x1, y1, "W")
+    board9.set_position(x2, y2, "W")
 
-    result = board9.is_adjacent(x1,y1,x2,y2)
+    result = board9.is_adjacent(x1, y1, x2, y2)
 
     assert result == False
+
 
 def test_same_spot_connected():
     """
@@ -408,9 +427,22 @@ def test_same_spot_connected():
     y1 = 3
     x2 = 3
     y2 = 3
-    board9.set_position(x1,y1,"W")
+    board9.set_position(x1, y1, "W")
     with pytest.raises(Exception):
-        board9.set_position(x2,y2,"W")
+        board9.set_position(x2, y2, "W")
+
+
+def test_is_connected_to_adjacent_dots():
+    """
+        Tests if two adjucent spots are connected
+    """
+    board9 = Board()
+    board9.set_position(5, 6, "B")
+    board9.set_position(5, 7, "B")
+
+    result = board9.is_connected_group(5, 6, 5, 7)
+    assert result == True
+
 
 def test_multiple_spots_connected():
     """
@@ -421,12 +453,13 @@ def test_multiple_spots_connected():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
 
-    result = board9.is_connected_group(3,2,3,4)
+    result = board9.is_connected_group(3, 2, 3, 4)
     assert result == True
+
 
 def test_multiple_spots_connected_long_leg():
     """
@@ -437,18 +470,19 @@ def test_multiple_spots_connected_long_leg():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
 
-    result = board9.is_connected_group(2,2,6,4)
+    result = board9.is_connected_group(2, 2, 6, 4)
     assert result == True
+
 
 def test_multiple_spots_connected_long_leg_subgrou():
     """
@@ -458,18 +492,19 @@ def test_multiple_spots_connected_long_leg_subgrou():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
 
-    result = board9.is_connected_group(3,3,4,5)
+    result = board9.is_connected_group(3, 3, 4, 5)
     assert result == True
+
 
 def test_multiple_spots_connected_long_leg_false():
     """
@@ -480,18 +515,19 @@ def test_multiple_spots_connected_long_leg_false():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
 
-    result = board9.is_connected_group(2,2,7,6)
+    result = board9.is_connected_group(2, 2, 7, 6)
     assert result == False
+
 
 def test_multiple_spots_connected_long_leg_with_1deadend():
     """
@@ -502,24 +538,25 @@ def test_multiple_spots_connected_long_leg_with_1deadend():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
-    board9.set_position(6,3,"B")
-    board9.set_position(7,3,"B")
-    board9.set_position(7,2,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
+    board9.set_position(6, 3, "B")
+    board9.set_position(7, 3, "B")
+    board9.set_position(7, 2, "B")
 
     # A dead end sibling
-    board9.set_position(4,6,"B")
+    board9.set_position(4, 6, "B")
 
-    result = board9.is_connected_group(2,2,7,2)
+    result = board9.is_connected_group(2, 2, 7, 2)
     assert result == True
+
 
 def test_multiple_spots_connected_long_leg_with_M_deadends():
     """
@@ -530,26 +567,27 @@ def test_multiple_spots_connected_long_leg_with_M_deadends():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
-    board9.set_position(6,3,"B")
-    board9.set_position(7,3,"B")
-    board9.set_position(7,2,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
+    board9.set_position(6, 3, "B")
+    board9.set_position(7, 3, "B")
+    board9.set_position(7, 2, "B")
 
     # A dead end sibling
-    board9.set_position(4,6,"B")
-    board9.set_position(4,7,"B")
-    board9.set_position(4,8,"B")
+    board9.set_position(4, 6, "B")
+    board9.set_position(4, 7, "B")
+    board9.set_position(4, 8, "B")
 
-    result = board9.is_connected_group(2,2,7,2)
+    result = board9.is_connected_group(2, 2, 7, 2)
     assert result == True
+
 
 def test_multiple_spots_connected_long_leg_closed_circle_siblings():
     """
@@ -560,28 +598,29 @@ def test_multiple_spots_connected_long_leg_closed_circle_siblings():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
-    board9.set_position(6,3,"B")
-    board9.set_position(7,3,"B")
-    board9.set_position(7,2,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
+    board9.set_position(6, 3, "B")
+    board9.set_position(7, 3, "B")
+    board9.set_position(7, 2, "B")
 
     # Closed sibling circle
-    board9.set_position(4,6,"B")
-    board9.set_position(4,7,"B")
-    board9.set_position(5,7,"B")
-    board9.set_position(6,7,"B")
-    board9.set_position(6,6,"B")
+    board9.set_position(4, 6, "B")
+    board9.set_position(4, 7, "B")
+    board9.set_position(5, 7, "B")
+    board9.set_position(6, 7, "B")
+    board9.set_position(6, 6, "B")
 
-    result = board9.is_connected_group(2,2,7,2)
+    result = board9.is_connected_group(2, 2, 7, 2)
     assert result == True
+
 
 def test_multiple_spots_not_connected_long_leg_closed_circle_siblings():
     """
@@ -592,25 +631,25 @@ def test_multiple_spots_not_connected_long_leg_closed_circle_siblings():
 
     board9 = Board(9)
     # setting multiple stones with same color
-    board9.set_position(2,2,"B")
-    board9.set_position(3,2,"B")
-    board9.set_position(3,3,"B")
-    board9.set_position(3,4,"B")
-    board9.set_position(3,5,"B")
-    board9.set_position(4,5,"B")
-    board9.set_position(5,5,"B")
-    board9.set_position(6,5,"B")
-    board9.set_position(6,4,"B")
-    board9.set_position(6,3,"B")
-    board9.set_position(7,3,"B")
-    board9.set_position(7,2,"B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    board9.set_position(3, 3, "B")
+    board9.set_position(3, 4, "B")
+    board9.set_position(3, 5, "B")
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(6, 5, "B")
+    board9.set_position(6, 4, "B")
+    board9.set_position(6, 3, "B")
+    board9.set_position(7, 3, "B")
+    board9.set_position(7, 2, "B")
 
     # Closed sibling circle
-    board9.set_position(4,6,"B")
-    board9.set_position(4,7,"B")
-    board9.set_position(5,7,"B")
-    board9.set_position(6,7,"B")
-    board9.set_position(6,6,"B")
+    board9.set_position(4, 6, "B")
+    board9.set_position(4, 7, "B")
+    board9.set_position(5, 7, "B")
+    board9.set_position(6, 7, "B")
+    board9.set_position(6, 6, "B")
 
-    result = board9.is_connected_group(2,2,8,2)
+    result = board9.is_connected_group(2, 2, 8, 2)
     assert result == False
