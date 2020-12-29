@@ -72,6 +72,9 @@ def test_all_clear_board():
         assert i["val"] == None
 
 
+# ##### POSITIONS #####
+
+
 def test_getting_position():
     """
         Test functionality of getting the position of
@@ -118,6 +121,20 @@ def test_setting_wrong_position():
         board9.set_position(32, 65, "W")
 
 
+def test_setting_possition_on_non_empty_spot():
+    """
+        Test functionality of getting the position of
+        specific stone by givving coordinates as parameters
+    """
+    board9 = Board(9)
+    board9.set_position(1, 1, "B")
+    with pytest.raises(Exception):
+        board9.set_position(1, 1, "W")
+
+
+# ##### VALUES #####
+
+
 def test_setting_wrong_value():
     """
         Test functionality of setting the position of
@@ -156,15 +173,7 @@ def test_val_check_false():
         board9.val_check("Z")
 
 
-def test_setting_possition_on_non_empty_spot():
-    """
-        Test functionality of getting the position of
-        specific stone by givving coordinates as parameters
-    """
-    board9 = Board(9)
-    board9.set_position(1, 1, "B")
-    with pytest.raises(Exception):
-        board9.set_position(1, 1, "W")
+# ##### SIBLINGS #####
 
 
 def test_find_next_sibling_1hor():
@@ -262,6 +271,9 @@ def test_find_next_siblings_4_vert_hor():
     # sorting the result data and the assumed data to have
     # a common structured data to check
     assert sorted(result) == sorted([(4, 4), (4, 2), (3, 3), (5, 3)])
+
+
+# ##### CONNECTED GROUPS #####
 
 
 def test_connected_positions_ver_up():
@@ -653,3 +665,113 @@ def test_multiple_spots_not_connected_long_leg_closed_circle_siblings():
 
     result = board9.is_connected_group(2, 2, 8, 2)
     assert result == False
+
+
+# ##### LIBERTIES #####
+
+
+def test_single_spot_liberties():
+    """
+        Tests if on single spot on an empty board
+        has liberties and how many of them.
+        Expected result: True
+    """
+
+    board9 = Board(9)
+    board9.set_position(4, 4, "B")
+    result = board9.has_liberties(4, 4, "B")
+    assert result[0] == True
+
+
+def test_single_spot_surrounded_liberties():
+    """
+        Tests if on single spot surrounded with other
+        color spots has liberties
+        Expected result: False
+    """
+
+    board9 = Board(9)
+    board9.set_position(4, 4, "B")
+    board9.set_position(4, 3, "W")
+    board9.set_position(4, 5, "W")
+    board9.set_position(3, 4, "W")
+    board9.set_position(5, 4, "W")
+    result = board9.has_liberties(4, 4, "B")
+    assert result[0] == False
+    assert result[1] == []
+
+
+def test_2_spots_liberties_vert():
+    """
+        Tests if on single spot on an empty board
+        has liberties and how many of them. Vertical
+        Expected result: True
+    """
+
+    board9 = Board(9)
+    board9.set_position(4, 4, "B")
+    board9.set_position(4, 5, "B")
+    result = board9.has_liberties(4, 4, "B")
+    assumed_lib_result = sorted([(4, 3), (3, 4), (3, 5), (4, 6), (5, 5), (5, 4)])
+
+    assert result[0] == True
+    assert sorted(result[1]) == assumed_lib_result
+
+
+def test_3_spots_liberties_hor():
+    """
+        Tests if on single spot on an empty board
+        has liberties and how many of them. Horizontal
+        Expected result: True and a list of Liberties
+    """
+
+    board9 = Board(9)
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    result = board9.has_liberties(4, 5, "B")
+    assumed_lib_result = sorted([(4, 4), (3, 5), (4, 6), (5, 6), (6, 5), (5, 4)])
+
+    assert result[0] == True
+    assert sorted(result[1]) == assumed_lib_result
+
+
+def test_3_spots_liberties_L_shaped():
+    """
+        Tests if on single spot on an empty board
+        has liberties and how many of them. L shaped
+        Expected result: True and a list of Liberties
+        Started from bottom
+    """
+
+    board9 = Board(9)
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(4, 4, "B")
+    result = board9.has_liberties(4, 4, "B")
+    assumed_lib_result = sorted(
+        [(4, 3), (3, 4), (3, 5), (4, 6), (5, 6), (6, 5), (5, 4)]
+    )
+
+    assert result[0] == True
+    assert sorted(result[1]) == assumed_lib_result
+
+
+def test_3_spots_liberties_L_shaped_from_center():
+    """
+        Tests if on single spot on an empty board
+        has liberties and how many of them. L shaped
+        Expected result: True and a list of Liberties
+        Started from bottom
+    """
+
+    board9 = Board(9)
+    board9.set_position(4, 5, "B")
+    board9.set_position(5, 5, "B")
+    board9.set_position(4, 4, "B")
+    result = board9.has_liberties(4, 5, "B")
+    assumed_lib_result = sorted(
+        [(4, 3), (3, 4), (3, 5), (4, 6), (5, 6), (6, 5), (5, 4)]
+    )
+
+    assert result[0] == True
+    assert sorted(result[1]) == assumed_lib_result

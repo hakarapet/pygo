@@ -115,6 +115,7 @@ class Board:
         curr_y = curr[1]
         siblings = []
 
+        # TODO Refactor
         if (
             self.is_adjacent(curr_x, curr_y, curr_x + 1, curr_y)
             and curr_x + 1 < self.size
@@ -214,3 +215,32 @@ class Board:
         result = self.__search(start_spot, goal_spot, previous, [], [])
 
         return result
+
+    # ##### LIBERTIES #####
+
+    def has_liberties(self, x, y, val, previous=None):
+        liberties = []
+
+        for xi in range(x - 1, x + 2, 2):
+            if xi > self.size:
+                continue
+            if previous == (xi, y):
+                continue
+            pos_x_val = self.get_position(xi, y)["val"]
+            if pos_x_val == None:
+                liberties.append((xi, y))
+            elif pos_x_val == val:
+                liberties += self.has_liberties(xi, y, val, (x, y))[1]
+
+        for yi in range(y - 1, y + 2, 2):
+            if yi > self.size:
+                continue
+            if previous == (x, yi):
+                continue
+            pos_y_val = self.get_position(x, yi)["val"]
+            if pos_y_val == None:
+                liberties.append((x, yi))
+            elif pos_y_val == val:
+                liberties += self.has_liberties(x, yi, val, (x, y))[1]
+
+        return (True, list(set(liberties))) if len(liberties) else (False, liberties)
