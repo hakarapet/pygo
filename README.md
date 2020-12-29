@@ -9,7 +9,7 @@ version).
 Daily training of any kind of code writing, unit test techniques
 
 ## ToDo
-- [ ] define "open liberties"
+- [x] define "open liberties"
 - [x] define "board". The board should be of three sizes: 9x9, 13x13, 19x19.
 - [x] define "move": placing a "stone" on an empty intersection
 - [x] define "position": each intersection on the board is in one and only one of
