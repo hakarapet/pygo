@@ -223,7 +223,7 @@ class Board:
         liberties = []
 
         for xi in range(x - 1, x + 2, 2):
-            if xi > self.size or previous == (xi, y):
+            if xi > self.size or previous == (xi, y) or xi < 0:
                 continue
             pos_x_val = self.get_position(xi, y)["val"]
             if pos_x_val == None:
@@ -232,7 +232,7 @@ class Board:
                 liberties += self.has_liberties(xi, y, val, (x, y))[1]
 
         for yi in range(y - 1, y + 2, 2):
-            if yi > self.size or previous == (x, yi):
+            if yi > self.size or previous == (x, yi) or yi < 0:
                 continue
             pos_y_val = self.get_position(x, yi)["val"]
             if pos_y_val == None:

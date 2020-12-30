@@ -703,7 +703,7 @@ def test_single_spot_surrounded_liberties():
 
 def test_2_spots_liberties_vert():
     """
-        Tests if on single spot on an empty board
+        Tests if single spot on an empty board
         has liberties and how many of them. Vertical
         Expected result: True
     """
@@ -720,7 +720,7 @@ def test_2_spots_liberties_vert():
 
 def test_3_spots_liberties_hor():
     """
-        Tests if on single spot on an empty board
+        Tests if single spot on an empty board
         has liberties and how many of them. Horizontal
         Expected result: True and a list of Liberties
     """
@@ -737,7 +737,7 @@ def test_3_spots_liberties_hor():
 
 def test_3_spots_liberties_L_shaped():
     """
-        Tests if on single spot on an empty board
+        Tests if single spot on an empty board
         has liberties and how many of them. L shaped
         Expected result: True and a list of Liberties
         Started from bottom
@@ -758,7 +758,7 @@ def test_3_spots_liberties_L_shaped():
 
 def test_3_spots_liberties_L_shaped_from_center():
     """
-        Tests if on single spot on an empty board
+        Tests if single spot on an empty board
         has liberties and how many of them. L shaped
         Expected result: True and a list of Liberties
         Started from bottom
@@ -771,6 +771,50 @@ def test_3_spots_liberties_L_shaped_from_center():
     result = board9.has_liberties(4, 5, "B")
     assumed_lib_result = sorted(
         [(4, 3), (3, 4), (3, 5), (4, 6), (5, 6), (6, 5), (5, 4)]
+    )
+
+    assert result[0] == True
+    assert sorted(result[1]) == assumed_lib_result
+
+
+def test_spots_liberties_L_shaped_from_Y0():
+    """
+        Tests if multiple spots on an empty board
+        has liberties and how many of them. L shaped
+        Expected result: True and a list of Liberties
+        Started from Y=0
+    """
+
+    board9 = Board(9)
+    board9.set_position(2, 0, "B")
+    board9.set_position(2, 1, "B")
+    board9.set_position(2, 2, "B")
+    board9.set_position(3, 2, "B")
+    result = board9.has_liberties(2, 0, "B")
+    assumed_lib_result = sorted(
+        [(1, 1), (1, 0), (1, 2), (2, 3), (3, 3), (4, 2), (3, 1), (3, 0)]
+    )
+
+    assert result[0] == True
+    assert sorted(result[1]) == assumed_lib_result
+
+
+def test_spots_liberties_L_shaped_from_X0():
+    """
+        Tests if multiple spots on an empty board
+        has liberties and how many of them. L shaped
+        Expected result: True and a list of Liberties
+        Started from X=0
+    """
+
+    board9 = Board(9)
+    board9.set_position(0, 4, "B")
+    board9.set_position(1, 4, "B")
+    board9.set_position(1, 5, "B")
+    board9.set_position(1, 6, "B")
+    result = board9.has_liberties(0, 4, "B")
+    assumed_lib_result = sorted(
+        [(0, 3), (1, 3), (2, 4), (2, 5), (2, 6), (1, 7), (0, 6), (0, 5)]
     )
 
     assert result[0] == True
