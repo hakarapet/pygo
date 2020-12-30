@@ -212,6 +212,14 @@ class Board:
     # ##### LIBERTIES #####
 
     def has_liberties(self, x, y, val, previous=None):
+        """
+            Checks if givven spot has liberties. If the spot
+            is a part of a group, it will count the whole group's
+            liberties
+            Attributes: x,y - coordinates, val - value of the spot,
+                        previous - a tuple of coordinates of previous spot
+            Returns: (Boolean, List)
+        """
         liberties = []
 
         for xi in range(x - 1, x + 2, 2):
