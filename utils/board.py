@@ -115,24 +115,17 @@ class Board:
         curr_y = curr[1]
         siblings = []
 
-        # TODO Refactor
-        if (
-            self.is_adjacent(curr_x, curr_y, curr_x + 1, curr_y)
-            and curr_x + 1 < self.size
-        ):
-            siblings.append((curr_x + 1, curr_y))
+        for xi in range(curr_x - 1, curr_x + 2, 2):
+            if xi > self.size and xi < 0:
+                continue
+            if self.is_adjacent(curr_x, curr_y, xi, curr_y):
+                siblings.append((xi, curr_y))
 
-        if self.is_adjacent(curr_x, curr_y, curr_x - 1, curr_y) and curr_x - 1 >= 0:
-            siblings.append((curr_x - 1, curr_y))
-
-        if (
-            self.is_adjacent(curr_x, curr_y, curr_x, curr_y + 1)
-            and curr_y + 1 < self.size
-        ):
-            siblings.append((curr_x, curr_y + 1))
-
-        if self.is_adjacent(curr_x, curr_y, curr_x, curr_y - 1) and curr_y - 1 >= 0:
-            siblings.append((curr_x, curr_y - 1))
+        for yi in range(curr_y - 1, curr_y + 2, 2):
+            if yi > self.size or yi < 0:
+                continue
+            if self.is_adjacent(curr_x, curr_y, curr_x, yi):
+                siblings.append((curr_x, yi))
 
         # Excluding the previous
         temp_siblings = list(set([sib for sib in siblings if sib != previous]))
