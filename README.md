@@ -9,6 +9,13 @@ version).
 Daily training of any kind of code writing, unit test techniques
 
 ## ToDo
+- [ ] define "a game/play"
+  - [ ] define a move
+  - [ ] define a capture
+  - [ ] define a self-capture
+  - [ ] define "pass"
+  - [ ] define a ko / superko
+- [ ] define board mirror conversion for opponent side view
 - [x] define "open liberties"
 - [x] define "board". The board should be of three sizes: 9x9, 13x13, 19x19.
 - [x] define "move": placing a "stone" on an empty intersection
